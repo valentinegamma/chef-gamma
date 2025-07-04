@@ -1,7 +1,8 @@
 import { useState } from "react"
+import Claude from "./Claude"
 export default function Main() {
 
-  const [ingredient, setIngredient] = useState([])
+  const [ingredient, setIngredient] = useState(['Milk', 'Meat'])
 
   const ingredientList = ingredient.map(item => <li key={item}>{item}</li>)
   function handleSubmit(formData) {
@@ -10,7 +11,7 @@ export default function Main() {
   }
 
   return(
-    <main>
+    <main className="app-main">
       <form action={handleSubmit}
       >
         <input 
@@ -22,7 +23,10 @@ export default function Main() {
         />
         <button className="form-button"> Add ingredient </button>
       </form>
+      {ingredient.length > 0 ? <h1 className="ingredient-heading">Ingredients on hand:</h1>: null}
       {ingredientList}
+
+      {ingredient.length >=3 ? <Claude />: null}
     </main>
   )
 }
