@@ -80,3 +80,21 @@ form {
   content: "+";
   margin-right: 0.5rem;
 }
+
+/* STATE */
+.state-section {
+  display: flex;
+  justify-content: center;
+}
+
+.State-btn {
+  border: 1px solid black;
+  padding: 50px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+li {
+  font-size: 32px;
+}
