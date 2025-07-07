@@ -5,6 +5,7 @@ export default function Main() {
 
   const [ingredient, setIngredient] = useState([])
   const [recipe, setRecipe] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const ingredientList = ingredient.map(item => <li key={item}>{item}</li>)
   function handleSubmit(formData) {
@@ -13,25 +14,33 @@ export default function Main() {
   }
 
   const handleClick = async () => {
+    setLoading(true);
     const result = await getRecipeFromMistral(ingredient);
     setRecipe(result);
+    setLoading(false);
   }
 
   return(
     <main>
-      <form action={handleSubmit}
-      >
+      <form action={handleSubmit}>
         <input 
-        className="form-input"
-        type="text" 
-        placeholder="eg. pork"
-        aria-label="Add ingredient"
-        name="ingredient"
+          className="form-input"
+          type="text" 
+          placeholder="eg. pork"
+          aria-label="Add ingredient"
+          name="ingredient"
         />
         <button className="form-button"> Add ingredient </button>
       </form>
-      {ingredient.length > 0 ? <h1 className="ingredient-heading">Ingredients on hand:</h1>: null}
-      {ingredientList}
+      {ingredient.length > 0 ? 
+        <>
+          <button className="clear-button" onClick={() => setIngredient([])}>
+            Clear ingredients
+          </button>
+          <h1 className="ingredient-heading">Ingredients on hand:</h1>
+          {ingredientList}
+        </>
+      : null}
 
       <section className="claude-flex">
         <div>
@@ -42,7 +51,33 @@ export default function Main() {
       </section>
 
       <section>
-        {recipe}
+        {loading ? (
+          <svg
+            width="40"
+            height="40"
+            viewBox="0 0 40 40"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#333"
+            style={{ display: "block", margin: "2rem auto" }}
+          >
+            <g fill="none" fillRule="evenodd">
+              <g transform="translate(2 2)" strokeWidth="3">
+                <circle strokeOpacity=".5" cx="18" cy="18" r="18"/>
+                <path d="M36 18c0-9.94-8.06-18-18-18">
+                  <animateTransform
+                    attributeName="transform"
+                    type="rotate"
+                    from="0 18 18"
+                    to="360 18 18"
+                    dur="1s"
+                    repeatCount="indefinite"/>
+                </path>
+              </g>
+            </g>
+          </svg>
+        ) : (
+          recipe
+        )}
       </section>
     </main>
   )
