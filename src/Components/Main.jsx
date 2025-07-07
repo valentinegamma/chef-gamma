@@ -1,4 +1,5 @@
 import { useState } from "react"
+import ReactMarkdown from 'react-markdown'
 import { getRecipeFromMistral } from "./Server.js";
 
 export default function Main() {
@@ -34,11 +35,11 @@ export default function Main() {
       </form>
       {ingredient.length > 0 ? 
         <>
+          <h1 className="ingredient-heading">Ingredients on hand:</h1>
+          {ingredientList}
           <button className="clear-button" onClick={() => setIngredient([])}>
             Clear ingredients
           </button>
-          <h1 className="ingredient-heading">Ingredients on hand:</h1>
-          {ingredientList}
         </>
       : null}
 
@@ -76,7 +77,9 @@ export default function Main() {
             </g>
           </svg>
         ) : (
-          recipe
+          <section className="recipe-container">
+            <ReactMarkdown>{recipe}</ReactMarkdown>
+          </section>
         )}
       </section>
     </main>
