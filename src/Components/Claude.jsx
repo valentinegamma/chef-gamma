@@ -16,7 +16,10 @@ export default function Claude() {
           <h2>Ready for a recipe?</h2>
           <p>Generate a recipe from your list of ingredients.</p>
         </div>
-        <button onClick={handleClick}>Get a recipe</button>
+        <button 
+          onClick={handleClick}>
+            Get a recipe
+        </button>
         </section>
 
         <section>

@@ -1,6 +1,6 @@
 
 .container {
-  width: 100%;
+  width: 90%;
   max-width: 720px;
   margin: 0 auto;
 }
@@ -31,6 +31,7 @@
 /* MAIN */
 
 .app-main {
+  width: 100%;
 max-width: 594px;
 margin: 0 auto;
 }
@@ -73,6 +74,12 @@ form {
   color: whitesmoke;
   background-color: #2e2e27;
   box-shadow: 0px 1px 2px 0px #0000000D;
+  transition: all 0.05s ease-in-out;
+}
+.form-button:active {
+  background-color: #929282;
+  transform: scale(1.2);
+
 }
 
 .form-button::before{
@@ -95,7 +102,7 @@ form {
 }
 
 li {
-  font-size: 20px;
+  font-size: 2rem;
   line-height: 3rem;
 }
 
@@ -117,7 +124,7 @@ li {
   margin-bottom: 4rem;
   display: flex;
   column-gap: 2rem;
-  width: 59.4rem;
+  max-width: 59.4rem;
   height: 10.9rem;
   border-radius: 8px;
   align-items: center;
@@ -147,10 +154,16 @@ li {
   font-weight: 500;
   font-size: 1.4rem;
   line-height: 2rem;
+  transition: all 0.1s ease-out;
 }
 
+.claude-flex > button:active {
+  background-color: #df7551;
+  transform: scale(1.2);
+
+}
 .recipe-container {
-  margin: 0 auto;
+  margin: 0 auto 8rem;
   padding: 4rem;
   background-color: #F0EFEB;
   border-radius: 8px;
@@ -162,7 +175,6 @@ li {
 
 .clear-button {
   margin-top: 2rem;
-  width: 15rem;
   height: 3.8rem;
   border: none;
   border-radius: 0.6rem;
@@ -175,4 +187,11 @@ li {
   color: rgb(80, 80, 80);
   background-color: #F0EFEB;
   box-shadow: 0px 1px 2px 0px #0000000D;
+  transition: all 0.05s ease-out;
+}
+
+.clear-button:active {
+  color: rgb(121, 75, 75);
+  transform: scale(1.2);
+
 }

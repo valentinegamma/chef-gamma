@@ -1,4 +1,5 @@
 import './App.css'
+import './Queries.css'
 import Main from './Components/Main'
 import Header from './Components/Header'
 

@@ -24,7 +24,7 @@ export async function getRecipeFromMistral(ingredient) {
         return response.choices[0].message.content;
     } catch (err) {
         console.error(err.message);
-        return "Failed to generate recipe.";
+        return "Failed to generate recipe. check your internet connection";
     }
 }
 
