@@ -7,11 +7,11 @@ export default function Main() {
   const ingredientList = ingredient.map(item => <li key={item}>{item}</li>)
   function handleSubmit(formData) {
     const newIngredient = formData.get("ingredient")
-    setIngredient(prev => [...prev, newIngredient])
+    {newIngredient ? setIngredient(prev => [...prev, newIngredient]) : null}
   }
 
   return(
-    <main className="app-main">
+    <main>
       <form action={handleSubmit}
       >
         <input 
