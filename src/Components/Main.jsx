@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import ReactMarkdown from 'react-markdown'
 import { getRecipeFromMistral } from "./Server.js";
 
@@ -9,6 +9,7 @@ export default function Main() {
   const [loading, setLoading] = useState(false);
 
   const ingredientList = ingredient.map(item => <li key={item}>{item}</li>)
+
   function handleSubmit(formData) {
     const newIngredient = formData.get("ingredient")
     {newIngredient ? setIngredient(prev => [...prev, newIngredient]) : null}
@@ -20,6 +21,15 @@ export default function Main() {
     setRecipe(result);
     setLoading(false);
   }
+
+  const recipeSection = useRef(null)
+  
+  useEffect(() => {
+    if (recipe !== null && recipeSection.current !== null) {
+      recipeSection.current.scrollIntoView({behavior: "smooth"})
+    }
+  }, [recipe])
+
 
   return(
     <main>
@@ -43,12 +53,14 @@ export default function Main() {
         </>
       : null}
 
-      <section className="claude-flex">
-        <div>
-          <h2>Ready for a recipe?</h2>
-          <p>Generate a recipe from your list of ingredients.</p>
-        </div>
-        <button onClick={handleClick}>Get a recipe</button>
+      <section 
+        ref={recipeSection}
+        className="claude-flex">
+          <div>
+            <h2>Ready for a recipe?</h2>
+            <p>Generate a recipe from your list of ingredients.</p>
+          </div>
+          <button onClick={handleClick}>Get a recipe</button>
       </section>
 
       <section>
@@ -78,7 +90,16 @@ export default function Main() {
           </svg>
         ) : (
           <section className="recipe-container">
-            <ReactMarkdown>{recipe}</ReactMarkdown>
+            <ReactMarkdown
+              components={{
+                h1: (props) => <h1 style={{fontSize: "2.5rem", fontWeight: "bold"}} {...props} />,
+                h2: (props) => <h1 style={{fontSize: "2.5rem", fontWeight: "bold"}} {...props} />,
+                h3: (props) => <h1 style={{fontSize: "2.5rem", fontWeight: "bold"}} {...props} />,
+                p: (props) => <p style={{fontSize: "2rem"}} {...props} />,
+              }}
+            >
+              {recipe}
+            </ReactMarkdown>
           </section>
         )}
       </section>
